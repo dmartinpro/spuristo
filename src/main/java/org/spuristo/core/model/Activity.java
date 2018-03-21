@@ -20,13 +20,18 @@ public class Activity extends ProvVertex {
     		this.clazz = Activity.class.getSimpleName().toLowerCase();
 	}
 
+    public Activity(String key) {
+		super(key);
+		this.clazz = Activity.class.getSimpleName().toLowerCase();
+    }
+
     public Activity(String key, String label, long startTime, long endTime) {
 		super(key);
 		this.clazz = Activity.class.getSimpleName().toLowerCase();
 		this.attributes = AttributeBuilder.init()
 				.addType(Activity.ACTIVITY_ATTRIBUTE.LABEL).andObjectAsString(label)
-				.addType(Activity.ACTIVITY_ATTRIBUTE.START_TIME).andObjectAsString(startTime)
-				.addType(Activity.ACTIVITY_ATTRIBUTE.END_TIME).andObjectAsString(startTime)
+				.addType(Activity.ACTIVITY_ATTRIBUTE.START_TIME).andObjectAsString(Long.toString(startTime))
+				.addType(Activity.ACTIVITY_ATTRIBUTE.END_TIME).andObjectAsString(Long.toString(endTime))
 				.build();
     }
 

@@ -3,6 +3,7 @@
  */
 package org.spuristo.core.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -101,6 +102,20 @@ public class Thing {
 
 	public void setAttributes(List<Attribute> attributes) {
 		this.attributes = attributes;
+	}
+
+	public void addAttributes(List<Attribute> attributes) {
+		if (this.attributes == null) {
+			this.attributes = new ArrayList<>();
+		}
+		this.attributes.addAll(attributes);
+	}
+
+	public void addAttribute(Attribute attribute) {
+		if (this.attributes == null) {
+			this.attributes = new ArrayList<>();
+		}
+		this.attributes.add(attribute);
 	}
 
 	@Override

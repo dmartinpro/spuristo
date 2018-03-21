@@ -54,6 +54,7 @@ public class Attribute {
 		ROLE("role"),
 		LOCATION("location"),
 		VALUE("value"),
+		CONFIGURATION("configuration"),
 		PROV_KEY("key"),
 		OTHER("other");
 

@@ -96,6 +96,7 @@ public class Relation extends Thing {
 		USED("used"),
 		REVISION_OF("wasRevisionOf"),
 		DERIVED_FROM("wasDerivedFrom"),
+		COMPOSED_OF("composedOf"),
 		ACTED_ON_BEHALF_OF("actedOnBehalfOf"),
 		WAS_ATTRIBUTED_TO("wasAttributedTo"),
 		WAS_ASSOCIATED_WITH("wasAssociatedWith"),
