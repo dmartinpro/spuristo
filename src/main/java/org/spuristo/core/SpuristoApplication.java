@@ -32,11 +32,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpuristoApplication {
 
 	public static void main(final String... args) {
-/*
-		final Class<?>[] runner = new Class<?>[] { CrudRunner2.class };
-		System.exit(SpringApplication.exit(SpringApplication.run(runner, args)));
-		*/
+
 		SpringApplication.run(SpuristoApplication.class, args);
+
 	}
 
 }
