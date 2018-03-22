@@ -4,8 +4,6 @@
 package org.spuristo.core.repository;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
@@ -22,7 +20,6 @@ import org.spuristo.core.model.Relation;
 import org.spuristo.core.model.SpuristoPath;
 import org.spuristo.core.model.SpuristoPath.PathRelation;
 import org.spuristo.core.model.SpuristoPath.PathVertex;
-import org.spuristo.core.model.SpuristoPath.VertexEdgePair;
 import org.spuristo.core.model.Thing;
 
 import com.arangodb.ArangoCursor;
