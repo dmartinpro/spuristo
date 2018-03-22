@@ -58,7 +58,7 @@ public class SpuristoArangoOperations {
 
 	@Autowired
 	private ObjectMapper objectMapper;
-	
+
 	private ArangoMappingContext context;
 
 	private Log log = LogFactory.getLog(SpuristoArangoOperations.class);

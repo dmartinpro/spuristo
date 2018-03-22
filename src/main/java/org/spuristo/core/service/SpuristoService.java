@@ -10,6 +10,10 @@ public interface SpuristoService {
 
 	public SpuristoPath getPathForEntity(String key);
 
+	public SpuristoPath getPathForActivity(String key);
+
+	public SpuristoPath getPathForAgent(String key);
+
 	public Entity addEntity(Entity entity);
 
 	public Activity addActivity(Activity activity);

@@ -42,6 +42,16 @@ public class SpuristoServiceImpl implements SpuristoService {
 		return path;
 	}
 
+	public SpuristoPath getPathForActivity(String key) {
+		SpuristoPath path = operations.getGraph(Activity.class, key, Relation.class, 2);
+		return path;
+	}
+
+	public SpuristoPath getPathForAgent(String key) {
+		SpuristoPath path = operations.getGraph(Agent.class, key, Relation.class, 2);
+		return path;
+	}
+
 	@Override
 	public Activity findActivityByKey(String key) {
 		Assert.notNull(key, "Key can't be null");

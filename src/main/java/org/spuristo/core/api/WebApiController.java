@@ -87,8 +87,16 @@ public class WebApiController {
     }
 
     @RequestMapping(path = "/path", method = RequestMethod.GET)
-    public SpuristoPath getPath(@RequestParam(value="key") String key) {
-    		return service.getPathForEntity(key);
+    public SpuristoPath getPath(@RequestParam(value="type") String type, @RequestParam(value="key") String key) {
+    		switch (type) {
+    		case "agent":
+        		return service.getPathForAgent(key);
+    		case "activity":
+        		return service.getPathForActivity(key);
+    		case "entity":
+        		return service.getPathForEntity(key);
+    		}
+    		return null;
     }
 
 }
