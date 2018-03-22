@@ -38,7 +38,7 @@ public class SpuristoServiceImpl implements SpuristoService {
 	private AgentRepository agentRepository;
 
 	public SpuristoPath getPathForEntity(String key) {
-		SpuristoPath path = operations.findPath(Entity.class, key, Relation.class, SpuristoPath.class, 5);
+		SpuristoPath path = operations.getGraph(Entity.class, key, Relation.class, 2);
 		return path;
 	}
 

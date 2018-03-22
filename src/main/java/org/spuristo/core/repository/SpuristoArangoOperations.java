@@ -4,8 +4,12 @@
 package org.spuristo.core.repository;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -15,6 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.StringUtils;
 import org.spuristo.core.model.Relation;
+import org.spuristo.core.model.SpuristoPath;
+import org.spuristo.core.model.SpuristoPath.PathRelation;
+import org.spuristo.core.model.SpuristoPath.PathVertex;
+import org.spuristo.core.model.SpuristoPath.VertexEdgePair;
 import org.spuristo.core.model.Thing;
 
 import com.arangodb.ArangoCursor;
@@ -322,7 +330,7 @@ public class SpuristoArangoOperations {
 		return operations.insert(value);
 	}
 
-	public <T> T findPath(Class<?> vertexClass, String vertexKey, Class<?> edgeClass, Class<T> returnTypeClass, int depth) {
+	public SpuristoPath getGraph(Class<?> vertexClass, String vertexKey, Class<?> edgeClass, int depth) {
 
 		final ArangoPersistentEntity<?> vertex = context.getPersistentEntity(vertexClass);
 		final String vertexCollection = vertex.getCollection();
@@ -338,23 +346,32 @@ public class SpuristoArangoOperations {
 		final ArangoCursor<VPackSlice> cursor = operations.query(
 				"FOR v, e, p IN 1..@depth ANY @Id @@edgeCollection RETURN [p]", bindVars, null, VPackSlice.class);
 
-		T path = null;
-		if (cursor.hasNext()) {
+		SpuristoPath _path = new SpuristoPath();
+		Set<PathVertex> vertices = new HashSet<>();
+		Set<PathRelation> edges = new HashSet<>();
+		while (cursor.hasNext()) {
 			VPackSlice obj = cursor.next();
 			if (obj.isArray()) {
 				final VPackSlice value = obj.get(0);
 				String json = operations.driver().util().deserialize(value, String.class);
 				try {
-					path = objectMapper.readValue(json, returnTypeClass);
+					_path = objectMapper.readValue(json, SpuristoPath.class);
+					vertices.addAll(_path.getVertices());
+					edges.addAll(_path.getEdges());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
+
+		final SpuristoPath path = new SpuristoPath();
+		path.setEdges(edges);
+		path.setVertices(vertices);
 		return path;
+
 	}
-	
-	
+
+
 	public <T extends Thing> Thing findThingByKey(T value) throws DataAccessException {
 		final ArangoPersistentEntity<?> persistentEntity = context.getPersistentEntity(value.getClass());
 		String collection = persistentEntity.getCollection();
