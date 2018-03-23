@@ -33,6 +33,220 @@ You can publish data in RabbitMQ queues and look at the relations between entiti
 http://localhost:6789/path?key=YourEntityKeyHere
 ```
 
+What data can be?
+-----------------
+
+3 types of data for now:
+
+* Entity
+* Activity
+* Agent
+
+They all extend in a way or another a common type, called Thing (for now, not found something more clear to describe this ... thing :) ). 
+
+And one 'edge':
+
+* Relation
+
+
+JSON format of these "Things"
+-----------------------------
+
+An Entity:
+
+```
+  {
+    "entity": {
+      "key": "entity1",
+      "clazz": "entity",
+      "attributes": [
+        {
+          "name": "role",
+          "value": {
+            "abc": "ABC",
+            "def": "DEF",
+            "ghi": "GHI",
+            "klm": "KLM"
+          }
+        },
+        {
+          "name": "label",
+          "value": {
+            "_default": "attribute1"
+          }
+        },
+        {
+          "name": "location",
+          "value": {
+            "_default": "attribute2"
+          }
+        },
+        {
+          "name": "value",
+          "value": {
+            "_default": "attribute3"
+          }
+        }
+      ]
+    }
+  }
+```
+
+
+An Agent:
+
+```
+  {
+    "agent": {
+      "key": "agent1",
+      "clazz": "agent",
+      "attributes": [
+        {
+          "name": "role",
+          "value": {
+            "abc": "ABC",
+            "def": "DEF",
+            "ghi": "GHI",
+            "klm": "KLM"
+          }
+        },
+        {
+          "name": "label",
+          "value": {
+            "_default": "attribute1"
+          }
+        },
+        {
+          "name": "other",
+          "value": {
+            "_default": "attribute2"
+          }
+        }
+      ]
+    }
+  }
+```
+
+An Activity:
+
+```
+  {
+    "activity": {
+      "key": "activity1",
+      "clazz": "activity",
+      "attributes": [
+        {
+          "name": "role",
+          "value": {
+            "abc": "ABC",
+            "def": "DEF",
+            "ghi": "GHI",
+            "klm": "KLM"
+          }
+        },
+        {
+          "name": "label",
+          "value": {
+            "_default": "attribute1"
+          }
+        },
+        {
+          "name": "other",
+          "value": {
+            "_default": "attribute2"
+          }
+        }
+      ]
+    }
+  }
+```
+
+They are just the same, except a property (clazz, which is set automatically when the Java object is created since it's based on the class used).
+
+
+A Relation:
+
+```
+  {
+    "relation": {
+      "key": null,
+      "clazz": "relation",
+      "attributes": null,
+      "from": {
+        "entity": {
+          "key": "entity1",
+          "clazz": "entity",
+          "attributes": [
+            {
+              "name": "role",
+              "value": {
+                "abc": "ABC",
+                "def": "DEF",
+                "ghi": "GHI",
+                "klm": "KLM"
+              }
+            },
+            {
+              "name": "label",
+              "value": {
+                "_default": "attribute1"
+              }
+            },
+            {
+              "name": "location",
+              "value": {
+                "_default": "attribute2"
+              }
+            },
+            {
+              "name": "value",
+              "value": {
+                "_default": "attribute3"
+              }
+            }
+          ]
+        }
+      },
+      "to": {
+        "agent": {
+          "key": "agent1",
+          "clazz": "agent",
+          "attributes": [
+            {
+              "name": "role",
+              "value": {
+                "abc": "ABC",
+                "def": "DEF",
+                "ghi": "GHI",
+                "klm": "KLM"
+              }
+            },
+            {
+              "name": "label",
+              "value": {
+                "_default": "attribute1"
+              }
+            },
+            {
+              "name": "other",
+              "value": {
+                "_default": "attribute2"
+              }
+            }
+          ]
+        }
+      },
+      "type": "wasGeneratedBy"
+    }
+  }
+```
+
+A Relation contains full Thing objects. You can create both 3 object when sending only the Relation. I'm sure it's not efficient the way it is currently coded, but as it's not my top priority right now, it doesn't matter, especially if transparently told ;-)
+A relation can also have its own set of attributes, why not after all?
+
+For all the objects, the "key" MUST be unique in the category of each object (Two entities can't have the same 'thing1' key, but an Activity and an Agent can have a key equals to "thing1").
+
+
 
 What's useful for a data lineage service
 ----------------------------------------
