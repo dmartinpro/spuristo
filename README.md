@@ -241,14 +241,13 @@ A Relation:
   }
 ```
 
-A Relation contains full Thing objects. You can create both 3 object when sending only the Relation. I'm sure it's not efficient the way it is currently coded, but as it's not my top priority right now, it doesn't matter, especially if transparently told ;-)
+A Relation contains full Thing objects in its "from" and "to" properties. You can create all 3 objects (Relation, From Thing and To Thing) when sending only the Relation. I'm sure it's not efficient the way it is currently coded, but as it's not my top priority right now, it doesn't matter, especially if transparently told ;-)
 A relation can also have its own set of attributes, why not after all?
 
-For all the objects, the "key" MUST be unique in the category of each object (Two entities can't have the same 'thing1' key, but an Activity and an Agent can have a key equals to "thing1").
+For all the objects, the "key" MUST be unique in the category of each object (Two entities CAN'T have the same 'thing1' key, but an Activity and an Agent CAN have a key equals to "thing1").
 
 
-
-What's useful for a data lineage service
+What's useful for a data lineage service [WIP right under]
 ----------------------------------------
 
 Some use cases:
