@@ -6,6 +6,16 @@ Inspired by
 
 This project is inspired by [Komadu project](https://github.com/Data-to-Insight-Center/komadu)
 
+
+Tracking what?
+--------------
+
+Who, When and how data was created, with as many context information as needed.
+And this is currently the kind of (simple for now) visualization Spuristo can provide: 
+
+![Data Lineage](./doc/images/graph1_small.jpg)
+
+
 How to run the project
 ----------------------
 
