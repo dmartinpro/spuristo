@@ -51,7 +51,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author dmartin
  *
  */
-public class SpuristoArangoOperations {
+public class SpuristoArangoOperations implements SpuristoRepositoryOperations {
 
 	@Autowired
 	private ArangoOperations operations;
@@ -62,23 +62,16 @@ public class SpuristoArangoOperations {
 	private ArangoMappingContext context;
 
 	private Log log = LogFactory.getLog(SpuristoArangoOperations.class);
-	
+
 	@PostConstruct
 	private void postInit() {
 		this.context = (ArangoMappingContext) operations.getConverter().getMappingContext();
 	}
 
-	public ArangoOperations getArangoOperations() {
-		return operations;
-	}
-
-	/**
-	 *
-	 * 
-	 * @see
-	 * com.arangodb.springframework.core.ArangoOperations#query(java.lang.String,
-	 * java.util.Map, com.arangodb.model.AqlQueryOptions, java.lang.Class)
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#query(java.lang.String, java.util.Map, com.arangodb.model.AqlQueryOptions, java.lang.Class)
 	 */
+	@Override
 	public <T> ArangoCursor<T> query(String query, Map<String, Object> bindVars, AqlQueryOptions options,
 			Class<T> entityClass) throws DataAccessException {
 		return operations.query(query, bindVars, options, entityClass);
@@ -96,13 +89,10 @@ public class SpuristoArangoOperations {
 		return operations.delete(values, entityClass, options);
 	}
 
-	/**
-	 *
-	 * 
-	 * @see
-	 * com.arangodb.springframework.core.ArangoOperations#delete(java.lang.Iterable,
-	 * java.lang.Class)
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#delete(java.lang.Iterable, java.lang.Class)
 	 */
+	@Override
 	public MultiDocumentEntity<? extends DocumentEntity> delete(Iterable<Object> values, Class<?> entityClass)
 			throws DataAccessException {
 		return operations.delete(values, entityClass);
@@ -120,14 +110,11 @@ public class SpuristoArangoOperations {
 		return operations.delete(id, entityClass, options);
 	}
 
-	/**
-	 *
-	 * 
-	 * @see
-	 * com.arangodb.springframework.core.ArangoOperations#delete(java.lang.String,
-	 * java.lang.Class)
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#delete(java.lang.String, java.lang.Class)
 	 */
 
+	@Override
 	public DocumentEntity delete(String id, Class<?> entityClass) throws DataAccessException {
 		return operations.delete(id, entityClass);
 	}
@@ -145,14 +132,11 @@ public class SpuristoArangoOperations {
 		return operations.update(values, entityClass, options);
 	}
 
-	/**
-	 *
-	 * 
-	 * @see
-	 * com.arangodb.springframework.core.ArangoOperations#update(java.lang.Iterable,
-	 * java.lang.Class)
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#update(java.lang.Iterable, java.lang.Class)
 	 */
 
+	@Override
 	public <T> MultiDocumentEntity<? extends DocumentEntity> update(Iterable<T> values, Class<T> entityClass)
 			throws DataAccessException {
 		return operations.update(values, entityClass);
@@ -170,14 +154,11 @@ public class SpuristoArangoOperations {
 		return operations.update(id, value, options);
 	}
 
-	/**
-	 *
-	 * 
-	 * @see
-	 * com.arangodb.springframework.core.ArangoOperations#update(java.lang.String,
-	 * java.lang.Object)
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#update(java.lang.String, T)
 	 */
 
+	@Override
 	public <T> DocumentEntity update(String id, T value) throws DataAccessException {
 		return operations.update(id, value);
 	}
@@ -243,14 +224,11 @@ public class SpuristoArangoOperations {
 		return operations.find(id, entityClass, options);
 	}
 
-	/**
-	 *
-	 * 
-	 * @see
-	 * com.arangodb.springframework.core.ArangoOperations#find(java.lang.String,
-	 * java.lang.Class)
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#find(java.lang.String, java.lang.Class)
 	 */
 
+	@Override
 	public <T> Optional<T> find(String id, Class<T> entityClass) throws DataAccessException {
 		return operations.find(id, entityClass);
 	}
@@ -266,14 +244,11 @@ public class SpuristoArangoOperations {
 		return operations.findAll(entityClass);
 	}
 
-	/**
-	 *
-	 * 
-	 * @see
-	 * com.arangodb.springframework.core.ArangoOperations#find(java.lang.Iterable,
-	 * java.lang.Class)
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#find(java.lang.Iterable, java.lang.Class)
 	 */
 
+	@Override
 	public <T> Iterable<T> find(Iterable<String> ids, Class<T> entityClass) throws DataAccessException {
 		return operations.find(ids, entityClass);
 	}
@@ -291,14 +266,11 @@ public class SpuristoArangoOperations {
 		return operations.insert(values, entityClass, options);
 	}
 
-	/**
-	 *
-	 * 
-	 * @see
-	 * com.arangodb.springframework.core.ArangoOperations#insert(java.lang.Iterable,
-	 * java.lang.Class)
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#insert(java.lang.Iterable, java.lang.Class)
 	 */
 
+	@Override
 	public <T> MultiDocumentEntity<? extends DocumentEntity> insert(Iterable<T> values, Class<T> entityClass)
 			throws DataAccessException {
 		return operations.insert(values, entityClass);
@@ -316,17 +288,19 @@ public class SpuristoArangoOperations {
 		return operations.insert(value, options);
 	}
 
-	/**
-	 *
-	 * 
-	 * @see
-	 * com.arangodb.springframework.core.ArangoOperations#insert(java.lang.Object)
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#insert(T)
 	 */
 
+	@Override
 	public <T> DocumentEntity insert(T value) throws DataAccessException {
 		return operations.insert(value);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#getGraph(java.lang.Class, java.lang.String, java.lang.Class, int)
+	 */
+	@Override
 	public SpuristoPath getGraph(Class<?> vertexClass, String vertexKey, Class<?> edgeClass, int depth) {
 
 		final ArangoPersistentEntity<?> vertex = context.getPersistentEntity(vertexClass);
@@ -386,6 +360,10 @@ public class SpuristoArangoOperations {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#upsert(org.spuristo.core.model.Relation, com.arangodb.springframework.core.ArangoOperations.UpsertStrategy)
+	 */
+	@Override
 	public <T> void upsert(Relation value, UpsertStrategy strategy) throws DataAccessException {
 		log.info("Upserting relation: " + value.toString());
 		
@@ -468,13 +446,10 @@ public class SpuristoArangoOperations {
 		}
 	}
 
-	/**
-	 *
-	 * 
-	 * @see
-	 * com.arangodb.springframework.core.ArangoOperations#upsert(java.lang.Object,
-	 * com.arangodb.springframework.core.ArangoOperations.UpsertStrategy)
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#upsert(T, com.arangodb.springframework.core.ArangoOperations.UpsertStrategy)
 	 */
+	@Override
 	public <T extends Thing> void upsert(T value, UpsertStrategy strategy) throws DataAccessException {
 		log.info("Upserting " + value.toString() + " ...");
 		try {
@@ -546,36 +521,29 @@ public class SpuristoArangoOperations {
 		}
 	}
 
-	/**
-	 *
-	 * 
-	 * @see
-	 * com.arangodb.springframework.core.ArangoOperations#upsert(java.lang.Iterable,
-	 * com.arangodb.springframework.core.ArangoOperations.UpsertStrategy)
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#upsert(java.lang.Iterable, com.arangodb.springframework.core.ArangoOperations.UpsertStrategy)
 	 */
 
+	@Override
 	public <T> void upsert(Iterable<T> value, UpsertStrategy strategy) throws DataAccessException {
 		operations.upsert(value, strategy);
 	}
 
-	/**
-	 *
-	 * 
-	 * @see
-	 * com.arangodb.springframework.core.ArangoOperations#exists(java.lang.String,
-	 * java.lang.Class)
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#exists(java.lang.String, java.lang.Class)
 	 */
 
+	@Override
 	public boolean exists(String id, Class<?> entityClass) throws DataAccessException {
 		return operations.exists(id, entityClass);
 	}
 
-	/**
-	 *
-	 * 
-	 * @see com.arangodb.springframework.core.ArangoOperations#dropDatabase()
+	/* (non-Javadoc)
+	 * @see org.spuristo.core.repository.SpuristoRepositoryOperations#dropDatabase()
 	 */
 
+	@Override
 	public void dropDatabase() throws DataAccessException {
 		operations.dropDatabase();
 	}

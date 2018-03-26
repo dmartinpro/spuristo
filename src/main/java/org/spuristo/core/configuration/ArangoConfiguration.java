@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.spuristo.core.repository.SpuristoArangoOperations;
+import org.spuristo.core.repository.SpuristoRepositoryOperations;
 
 import com.arangodb.ArangoDB;
 import com.arangodb.ArangoDB.Builder;
@@ -34,7 +35,7 @@ public class ArangoConfiguration extends AbstractArangoConfiguration {
 	}
 
 	@Bean
-	public SpuristoArangoOperations ops() {
+	public SpuristoRepositoryOperations ops() {
 		return new SpuristoArangoOperations();
 	}
 

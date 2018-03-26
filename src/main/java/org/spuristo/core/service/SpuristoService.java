@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package org.spuristo.core.service;
 
 import org.spuristo.core.model.Activity;
@@ -6,6 +9,11 @@ import org.spuristo.core.model.Entity;
 import org.spuristo.core.model.Relation;
 import org.spuristo.core.model.SpuristoPath;
 
+/**
+ * 
+ * @author dmartin
+ *
+ */
 public interface SpuristoService {
 
 	public SpuristoPath getPathForEntity(String key);
