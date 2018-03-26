@@ -1,6 +1,8 @@
 SPURISTO (Tracker in Esperanto)
 ==================================
 
+[![Build Status](https://travis-ci.org/dmartinpro/spuristo.svg?branch=master)](https://travis-ci.org/dmartinpro/spuristo)
+
 Inspired by
 -----------
 
