@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
-@ComponentScan(basePackages= {"org.spuristo.core.api", "org.spuristo.core.configuration"})
+@ComponentScan(basePackages= {"org.spuristo.core.api", "org.spuristo.core.configuration", "org.spuristo.core.runner"})
 public class SpuristoConfiguration {
 
 }
